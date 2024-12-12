@@ -74,7 +74,7 @@ jobs:
       - name: Build
         run: |
           clang_dir="$(clang --print-search-dirs | awk -F= '/^libraries: =/ { print $2 }')"
-          export OPENCV_LINK_LIBS=opencv_core,opencv_videoio,opencv_imgcodecs,opencv_imgproc,libittnotify,libippicv,zlib,OpenCL.framework,Cocoa.framework,Accelerate.framework,AVFoundation.framework,CoreGraphics.framework,CoreMedia.framework,CoreVideo.framework,QuartzCore.framework,clang_rt.osx
+          export OPENCV_LINK_LIBS=opencv_core,opencv_videoio,opencv_imgcodecs,opencv_imgproc,libittnotify,zlib,OpenCL.framework,Cocoa.framework,Accelerate.framework,AVFoundation.framework,CoreGraphics.framework,CoreMedia.framework,CoreVideo.framework,QuartzCore.framework,clang_rt.osx
           export OPENCV_LINK_PATHS=/usr/local/lib,/usr/local/lib/opencv4/3rdparty,$clang_dir/lib/darwin
           export OPENCV_INCLUDE_PATHS=/usr/local/include,/usr/local/include/opencv4
           cargo build --release
