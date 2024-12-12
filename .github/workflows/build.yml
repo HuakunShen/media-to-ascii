@@ -5,10 +5,10 @@ name: build
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+  push:
+  #     branches: [ "main" ]
+  #   pull_request:
+  #     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -78,14 +78,14 @@ jobs:
           export OPENCV_LINK_PATHS=/usr/local/lib,/usr/local/lib/opencv4/3rdparty,$clang_dir/lib/darwin
           export OPENCV_INCLUDE_PATHS=/usr/local/include,/usr/local/include/opencv4
           cargo build --release
-        
+
       # Ready artifacts for upload
       - name: Prepare Artifacts
         run: |
           export MEDIATOASCII_VERSION=$(perl -ne 'print "$1\n" if /^version\s*=\s*"(.*?)"/' Cargo.toml)
           chmod +x target/release/mediatoascii
           zip -j mediatoascii-x86_64-apple-darwin-$MEDIATOASCII_VERSION.zip target/release/mediatoascii
-        
+
       # Upload artifact: https://github.com/actions/upload-artifact
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
@@ -93,5 +93,3 @@ jobs:
           name: mediatoascii-x86_64-apple-darwin
           path: mediatoascii-x86_64-apple-darwin-*.zip
           retention-days: 1
-        
-
